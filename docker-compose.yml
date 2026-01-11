@@ -1,0 +1,106 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: serenai_mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - serenai_network
+    command: ["--replSet", "rs0", "--bind_ip_all", "--port", "27017"]
+
+  mongo-init:
+    image: mongo:latest
+    container_name: serenai_mongo_init
+    restart: "no"
+    depends_on:
+      - mongodb
+    command: >
+      bash -c "sleep 10 && mongosh --host mongodb:27017 --eval 'try { rs.status() } catch (err) { rs.initiate({ _id: \"rs0\", members: [{ _id: 0, host: \"mongodb:27017\" }] }) }'"
+    networks:
+      - serenai_network
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: serenai_qdrant
+    restart: always
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - serenai_network
+
+  embeddings:
+    image: ghcr.io/huggingface/text-embeddings-inference:cpu-1.2
+    container_name: serenai_embeddings
+    restart: always
+    volumes:
+      - embedding_data:/data
+    command: ["--model-id", "${EMBEDDING_LOCAL_MODEL:-BAAI/bge-base-en}", "--port", "80"]
+    networks:
+      - serenai_network
+    profiles:
+      - local-embeddings
+
+  backend:
+    build:
+      context: ./node-backend
+      dockerfile: Dockerfile
+    container_name: serenai_backend
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - CORS_ORIGIN=http://localhost:3000
+      - LOG_LEVEL=info
+      - MONGODB_URI=mongodb://mongodb:27017/serenai?replicaSet=rs0
+      - MONGODB_DATABASE_NAME=serenai
+      - QDRANT_URL=http://qdrant:6333
+      - QDRANT_API_KEY=
+      - EMBEDDING_SERVICE_URL=http://embeddings:80
+
+    extra_hosts:
+      - "localhost:host-gateway"
+      - "host.docker.internal:host-gateway"
+
+      # Other envs will be passed from local .env or injected
+    env_file:
+      - ./node-backend/.env
+    depends_on:
+      - mongodb
+      - qdrant
+    networks:
+      - serenai_network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:5000/api/v1
+    container_name: serenai_frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+    env_file:
+      - ./frontend/.env
+    depends_on:
+      - backend
+    networks:
+      - serenai_network
+
+networks:
+  serenai_network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+  qdrant_data:
+  embedding_data:

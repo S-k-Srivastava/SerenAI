@@ -1,0 +1,166 @@
+/* Custom styling for react-date-range to match app theme */
+.date-range-picker-wrapper {
+  width: 100%;
+  max-width: 100%;
+}
+
+.date-range-picker-wrapper .rdrCalendarWrapper {
+  background: transparent;
+  color: hsl(var(--foreground));
+  width: 100%;
+  max-width: 100%;
+}
+
+.date-range-picker-wrapper .rdrMonthAndYearWrapper {
+  padding-top: 0;
+  height: 50px;
+}
+
+.date-range-picker-wrapper .rdrMonth {
+  padding: 0.5em;
+  width: 100%;
+  min-width: 280px;
+}
+
+@media (min-width: 640px) {
+  .date-range-picker-wrapper .rdrMonth {
+    padding: 0 0.833em 1.666em 0.833em;
+    width: 300px;
+  }
+}
+
+/* Hide static ranges on mobile */
+.date-range-picker-wrapper .rdrDefinedRangesWrapper {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .date-range-picker-wrapper .rdrDefinedRangesWrapper {
+    display: flex;
+  }
+}
+
+.date-range-picker-wrapper .rdrMonthName {
+  color: hsl(var(--foreground));
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.date-range-picker-wrapper .rdrWeekDays {
+  padding: 0.5em 0;
+}
+
+.date-range-picker-wrapper .rdrWeekDay {
+  color: hsl(var(--muted-foreground));
+  font-weight: 500;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.date-range-picker-wrapper .rdrDay {
+  color: hsl(var(--foreground));
+  height: 2.2em;
+}
+
+@media (min-width: 640px) {
+  .date-range-picker-wrapper .rdrDay {
+    height: 2.5em;
+  }
+}
+
+.date-range-picker-wrapper .rdrDayNumber span {
+  font-weight: 500;
+  font-size: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .date-range-picker-wrapper .rdrDayNumber span {
+    font-size: 0.875rem;
+  }
+}
+
+.date-range-picker-wrapper .rdrDayToday .rdrDayNumber span:after {
+  background: hsl(var(--primary));
+}
+
+.date-range-picker-wrapper .rdrDayDisabled {
+  background-color: transparent;
+}
+
+.date-range-picker-wrapper .rdrDayPassive .rdrDayNumber span {
+  color: hsl(var(--muted-foreground));
+  opacity: 0.3;
+}
+
+.date-range-picker-wrapper .rdrDayHovered .rdrDayNumber:after {
+  border-color: hsl(var(--primary));
+  opacity: 0.2;
+}
+
+.date-range-picker-wrapper .rdrDay:not(.rdrDayPassive) .rdrInRange {
+  background: hsl(var(--primary) / 0.1);
+  color: hsl(var(--foreground));
+}
+
+.date-range-picker-wrapper .rdrDay:not(.rdrDayPassive) .rdrStartEdge,
+.date-range-picker-wrapper .rdrDay:not(.rdrDayPassive) .rdrEndEdge {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  font-weight: 600;
+}
+
+.date-range-picker-wrapper .rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span {
+  color: hsl(var(--foreground));
+}
+
+.date-range-picker-wrapper .rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span,
+.date-range-picker-wrapper .rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span {
+  color: hsl(var(--primary-foreground));
+}
+
+.date-range-picker-wrapper .rdrNextPrevButton {
+  background: transparent;
+  border: 1px solid hsl(var(--border));
+  opacity: 0.7;
+}
+
+.date-range-picker-wrapper .rdrNextPrevButton:hover {
+  background: hsl(var(--primary) / 0.1);
+  opacity: 1;
+  border-color: hsl(var(--primary) / 0.3);
+}
+
+.date-range-picker-wrapper .rdrPprevButton i {
+  border-color: transparent hsl(var(--foreground)) transparent transparent;
+}
+
+.date-range-picker-wrapper .rdrNextButton i {
+  border-color: transparent transparent transparent hsl(var(--foreground));
+}
+
+.date-range-picker-wrapper .rdrStartEdge {
+  border-top-left-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+}
+
+.date-range-picker-wrapper .rdrEndEdge {
+  border-top-right-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
+}
+
+.date-range-picker-wrapper .rdrDayStartOfMonth .rdrInRange,
+.date-range-picker-wrapper .rdrDayStartOfMonth .rdrEndEdge,
+.date-range-picker-wrapper .rdrDayStartOfWeek .rdrInRange,
+.date-range-picker-wrapper .rdrDayStartOfWeek .rdrEndEdge {
+  border-top-left-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+}
+
+.date-range-picker-wrapper .rdrDayEndOfMonth .rdrInRange,
+.date-range-picker-wrapper .rdrDayEndOfMonth .rdrStartEdge,
+.date-range-picker-wrapper .rdrDayEndOfWeek .rdrInRange,
+.date-range-picker-wrapper .rdrDayEndOfWeek .rdrStartEdge {
+  border-top-right-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
+}

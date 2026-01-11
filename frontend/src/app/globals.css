@@ -1,0 +1,292 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Base colors */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    /* Card colors */
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --card-hover: 178 100% 97%;
+
+    /* Popover */
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Primary - Professional Teal (Accessible with white text) */
+    /* Primary - Professional Teal (Darker shade requested) */
+    /* Approx Teal-700/800 */
+    --primary: 175 84% 25%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 175 84% 35%;
+    --primary-dark: 175 84% 15%;
+    --primary-hover: 175 84% 20%;
+
+    /* Secondary - Neutral/Slate */
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --secondary-hover: 210 40% 92%;
+
+    /* Muted - Neutral grays */
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --muted-hover: 210 40% 92%;
+
+
+    /* Success */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    --success-light: 142 76% 46%;
+    --success-hover: 142 76% 32%;
+
+    /* Warning */
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --warning-light: 38 92% 60%;
+    --warning-hover: 38 92% 45%;
+
+    /* Destructive */
+    /* Destructive - Minimal/Softer Red */
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --destructive-light: 0 70% 60%;
+    --destructive-hover: 0 70% 45%;
+
+    /* Info */
+    --info: 199 89% 48%;
+    --info-foreground: 0 0% 100%;
+    --info-light: 199 89% 58%;
+    --info-hover: 199 89% 43%;
+
+    /* Border and input */
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --input-hover: 214 32% 87%;
+    --ring: 175 84% 32%;
+
+    /* Chart colors */
+    --chart-1: 175 84% 32%;
+    --chart-2: 200 90% 48%;
+    --chart-3: 142 76% 36%;
+    --chart-4: 38 92% 50%;
+    --chart-5: 0 84% 60%;
+
+    /* Radius */
+    --radius: 0.5rem;
+    --font-sans: 'Inter', sans-serif;
+  }
+
+  .dark {
+    /* Dark mode - Corrected Contrast: Card Lighter, BG Darker */
+    /* Background: #171717 (Requested Darker) */
+    --background: 0 0% 9%;
+    --foreground: 210 40% 98%;
+
+    /* Card: Neutral Lighter Gray (#212121) to match #1c1c1c */
+    --card: 0 0% 13%; 
+    --card-foreground: 210 40% 98%;
+    /* Hover slightly lighter */
+    --card-hover: 0 0% 16%;
+
+    /* Popover matches Card */
+    --popover: 0 0% 15%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Primary - Teal (Darker shade for readability) */
+    /* Keeping same as light mode or slightly adjusted but definitely darker than previous 45% lightness */
+    /* Using 175 84% 35% for slightly better visibility on dark but still contrasting with white text */
+    /* Primary - Teal (Darker shade for readability) */
+    /* Using darker shade as requested, improving contrast */
+    --primary: 175 84% 30%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 175 84% 40%;
+    --primary-dark: 175 84% 20%;
+    --primary-hover: 175 84% 35%;
+
+
+    /* Secondary */
+    --secondary: 222 47% 20%;
+    --secondary-foreground: 210 40% 98%;
+    --secondary-hover: 222 47% 25%;
+
+    /* Muted */
+    --muted: 223 13% 15%; /* Adjusted to match new card tone */
+    --muted-foreground: 215 20% 65%;
+    --muted-hover: 223 13% 20%;
+
+
+    /* Success */
+    --success: 142 76% 40%;
+    --success-foreground: 0 0% 100%;
+    --success-light: 142 76% 50%;
+    --success-hover: 142 76% 45%;
+
+    /* Warning */
+    --warning: 38 92% 55%;
+    --warning-foreground: 0 0% 100%;
+    --warning-light: 38 92% 65%;
+    --warning-hover: 38 92% 60%;
+
+
+    /* Destructive */
+    /* Destructive - Deep Minimal Red */
+    --destructive: 0 60% 40%;
+    --destructive-foreground: 0 0% 100%;
+    --destructive-light: 0 60% 50%;
+    --destructive-hover: 0 60% 35%;
+
+    /* Info */
+    --info: 199 89% 53%;
+    --info-foreground: 0 0% 100%;
+    --info-light: 199 89% 63%;
+    --info-hover: 199 89% 58%;
+
+    /* Border and input */
+    /* Border and input - High Contrast for Dark Mode */
+    --border: 215 20% 35%; 
+    --input: 215 20% 35%;
+    --input-hover: 215 20% 40%;
+    --ring: 178 100% 45%;
+
+    /* Chart colors */
+    --chart-1: 178 100% 45%;
+    --chart-2: 200 90% 55%;
+    --chart-3: 142 76% 40%;
+    --chart-4: 38 92% 55%;
+    --chart-5: 0 72% 51%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom Scrollbar Styles */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
+}
+
+/* Chrome, Edge, and Safari */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+div::-webkit-scrollbar,
+section::-webkit-scrollbar,
+main::-webkit-scrollbar,
+aside::-webkit-scrollbar,
+nav::-webkit-scrollbar,
+ul::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+div::-webkit-scrollbar-track,
+section::-webkit-scrollbar-track,
+main::-webkit-scrollbar-track,
+aside::-webkit-scrollbar-track,
+nav::-webkit-scrollbar-track,
+ul::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+div::-webkit-scrollbar-thumb,
+section::-webkit-scrollbar-thumb,
+main::-webkit-scrollbar-thumb,
+aside::-webkit-scrollbar-thumb,
+nav::-webkit-scrollbar-thumb,
+ul::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover,
+div::-webkit-scrollbar-thumb:hover,
+section::-webkit-scrollbar-thumb:hover,
+main::-webkit-scrollbar-thumb:hover,
+aside::-webkit-scrollbar-thumb:hover,
+nav::-webkit-scrollbar-thumb:hover,
+ul::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 dark:bg-black/30 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-lg;
+  }
+  
+  .glass-card {
+    @apply bg-card/60 backdrop-blur-xl border-white/10 shadow-xl;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px currentColor;
+  }
+  
+  .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+    
+  .animate-pulse-glow {
+        animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+}
+
+/* Custom placeholder color support via CSS custom property */
+.themed-placeholder::placeholder {
+  color: var(--placeholder-color, currentColor) !important;
+  opacity: 1 !important;
+}
+
+/* Chat suggested prompts hover effect */
+button:hover[style*="--hover-border-color"] {
+  border-color: var(--hover-border-color) !important;
+  background-color: var(--hover-bg-color) !important;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { opacity: 1; box-shadow: 0 0 20px currentColor; }
+    50% { opacity: 0.5; box-shadow: 0 0 5px currentColor; }
+}
+
+@keyframes loading-wave {
+  0%, 100% {
+    transform: scaleY(0.4);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scaleY(1.2);
+    opacity: 1;
+  }
+}

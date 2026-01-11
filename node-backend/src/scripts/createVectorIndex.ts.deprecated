@@ -1,0 +1,76 @@
+import mongoose from "mongoose";
+import { env } from "../config/env/index.js";
+
+async function createVectorIndex() {
+    console.log("Connecting to MongoDB...");
+    await mongoose.connect(env.MONGODB_URI);
+    const db = mongoose.connection.db;
+
+    if (!db) {
+        throw new Error("Could not connect to database");
+    }
+
+    const collectionName = env.VECTOR_COLLECTION_NAME || "documents";
+    const indexName = env.VECTOR_SEARCH_INDEX_NAME || "vector_index_root";
+
+    // Ensure collection exists
+    const collections = await db.listCollections({ name: collectionName }).toArray();
+    if (collections.length === 0) {
+        console.log(`Collection '${collectionName}' does not exist. Creating it...`);
+        await db.createCollection(collectionName);
+    }
+
+    const collection = db.collection(collectionName);
+
+    console.log(`Setting up Vector Search Index '${indexName}' on collection '${collectionName}'...`);
+
+    const indexDefinition = {
+        name: indexName,
+        type: "vectorSearch",
+        definition: {
+            fields: [
+                {
+                    type: "vector",
+                    path: "embedding",
+                    numDimensions: 1536,
+                    similarity: "cosine"
+                },
+                {
+                    type: "filter",
+                    path: "document_id"
+                }
+            ]
+        }
+    };
+
+    try {
+        // Check if index already exists
+        const indexes = await collection.listSearchIndexes().toArray();
+        const existingIndex = indexes.find(idx => idx.name === indexName);
+
+        if (existingIndex) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const status = (existingIndex as any).status || "UNKNOWN";
+            console.log(`Index '${indexName}' already exists. Status: ${status}`);
+            if (status === "ACTIVE") {
+                console.log("Index is ACTIVE and ready for use.");
+            } else {
+                console.log("Index is still provisioning. Searches may return incomplete or zero results.");
+            }
+        } else {
+            console.log("Creating high-definition vector search index...");
+            await collection.createSearchIndex(indexDefinition);
+            console.log("Successfully requested index creation!");
+            console.log("NOTE: It may take a few minutes for the index to be fully 'ACTIVE' on MongoDB Atlas.");
+        }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+        console.error("Error creating vector index:", error.message);
+        console.log("\nIf your MongoDB version or tier doesn't support 'createSearchIndex', please create it manually in the Atlas UI:");
+        console.log(JSON.stringify(indexDefinition.definition, null, 2));
+    } finally {
+        await mongoose.disconnect();
+    }
+}
+
+createVectorIndex().catch(console.error);
