@@ -13,7 +13,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=flat-square&logo=typescript)](https://typescriptlang.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
 
-[Features](#-features) • [Quick Start](#-quick-start) • [User Guide](#-user-guide) • [Ollama Setup](#-ollama-self-hosted-llm) • [Tech Stack](#-technology-stack)
+[Features](#-features) • [Demo](#-demo) • [Quick Start](#-quick-start) • [User Guide](#-user-guide) • [Ollama Setup](#-ollama-self-hosted-llm) • [Tech Stack](#-technology-stack)
 
 </div>
 
@@ -38,6 +38,12 @@ SerenAI is a **self-hosted AI chatbot platform** that turns your documents into 
 📊 **Admin Dashboard** — Monitor platform usage, manage users and roles, track AI token consumption, and handle support tickets—all from a centralized admin panel.
 
 **Perfect for:** Customer support, internal knowledge bases, documentation assistants, FAQ bots, and any use case where you need AI that knows your content.
+
+---
+
+## 🎥 Demo
+
+<video src="docs/demo/demo.mp4" controls width="100%"></video>
 
 ---
 
