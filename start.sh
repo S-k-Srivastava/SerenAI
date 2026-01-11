@@ -50,6 +50,8 @@ if [ "$FRESH_START" = true ]; then
         echo -e "${GREEN}Cleaning up Docker resources...${NC}"
         # We use explicit cleanup
         docker compose down -v --rmi local --remove-orphans
+        # Force remove known containers to prevent name conflicts
+        docker rm -f serenai_mongodb serenai_mongo_init serenai_qdrant serenai_embeddings serenai_backend serenai_frontend 2>/dev/null || true
         echo -e "${GREEN}Cleanup complete.${NC}"
     else
         echo -e "${RED}Fresh start cancelled.${NC}"
