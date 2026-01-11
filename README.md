@@ -43,7 +43,7 @@ SerenAI is a **self-hosted AI chatbot platform** that turns your documents into 
 
 ## 🎥 Demo
 
-<video src="docs/demo/demo.mp4" controls width="100%"></video>
+[<video src="docs/demo/demo.mp4" controls width="100%"></video>](https://github.com/S-k-Srivastava/SerenAI/blob/master/docs/demo/demo.mp4)
 
 ---
 
