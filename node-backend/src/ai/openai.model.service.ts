@@ -24,7 +24,6 @@ export class OpenAIModelService implements IModelService {
                     apiKey: apiKey,
                 },
                 model: config.llmConfig.model_name,
-                temperature: config.temperature,
                 maxTokens: config.maxTokens,
             });
         } catch (error: unknown) {
