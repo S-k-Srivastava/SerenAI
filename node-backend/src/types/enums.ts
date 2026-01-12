@@ -11,7 +11,7 @@ export enum EmbeddingProviderEnum {
 }
 
 export const LLMProviderDescriptions: Record<LLMProviderEnum, string> = {
-  [LLMProviderEnum.OPENAI]: "OpenAI GPT models - Requires OpenAI API key. Get it from https://platform.openai.com/api-keys",
+  [LLMProviderEnum.OPENAI]: "OpenAI GPT models - Requires OpenAI API key. Get it from https://platform.openai.com/api-keys. Note: Latest OpenAI Models doesn't support temperature.",
   [LLMProviderEnum.OLLAMA]: "Ollama - Run LLMs locally. Requires Ollama installation and base URL (e.g., http://localhost:11434)"
 };
 
