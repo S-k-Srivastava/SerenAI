@@ -31,6 +31,24 @@ export default function CreateDocumentPage() {
             return;
         }
 
+        // Calculate total size of all chunks
+        const totalSize = chunks.reduce((sum, chunk) => {
+            return sum + new Blob([chunk.content]).size;
+        }, 0);
+
+        // Check if total size exceeds 500KB
+        const MAX_SIZE_KB = 500;
+        const MAX_SIZE_BYTES = MAX_SIZE_KB * 1024;
+
+        if (totalSize > MAX_SIZE_BYTES) {
+            const sizeInKB = (totalSize / 1024).toFixed(2);
+            toast.error(
+                `Document is too large (${sizeInKB} KB). Please keep your document text within ${MAX_SIZE_KB} KB.`,
+                { duration: 5000 }
+            );
+            return;
+        }
+
         setLoading(true);
         try {
             await documentService.create({
