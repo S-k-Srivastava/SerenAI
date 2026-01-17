@@ -39,7 +39,7 @@ services:
     restart: always
     volumes:
       - embedding_data:/data
-    command: ["--model-id", "${EMBEDDING_LOCAL_MODEL:-BAAI/bge-base-en}", "--port", "80"]
+    command: ["--model-id", "${EMBEDDING_LOCAL_MODEL:-BAAI/bge-base-en}", "--port", "80", "--payload-limit", "52428800"]
     networks:
       - serenai_network
     profiles:
