@@ -41,8 +41,9 @@ SerenAI is a **self-hosted AI chatbot platform** that turns your documents into 
 
 ---
 
-## 🎥 Demo Video (Please Download and watch as Github doesn't support large media files)
-[https://github.com/S-k-Srivastava/SerenAI/blob/master/docs/demo/demo.mp4](https://www.youtube.com/watch?v=vIrKn69FEsY)
+## 🎥 Watch the SerenAI Demo
+
+[![SerenAI Demo](https://img.youtube.com/vi/vIrKn69FEsY/maxresdefault.jpg)](https://www.youtube.com/watch?v=vIrKn69FEsY)
 
 ---
 
